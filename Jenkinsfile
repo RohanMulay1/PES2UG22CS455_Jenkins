@@ -1,30 +1,31 @@
 pipeline {
     agent any
+
     stages {
         stage('Build') {
             steps {
-                script {
-                    sh 'g++ -o PES2UG22CS455-1 main.cpp' // Compile the .cpp file
-                }
+                shh 'g++ -o output PES2UG22CS455.cpp' // Intentional typo in 'sh'
             }
         }
+
         stage('Test') {
             steps {
-                script {
-                    sh './PES2UG22CS455-1' // Run the compiled program
-                }
+                sh './output'
             }
         }
+
         stage('Deploy') {
             steps {
                 echo 'Deploying application...'
             }
         }
     }
+
     post {
         failure {
             echo 'Pipeline failed'
         }
     }
 }
+
 
