@@ -1,35 +1,30 @@
 pipeline {
     agent any
-
     stages {
         stage('Build') {
             steps {
-                echo 'Building the project...'
-                sh 'g++ -o output main.cpp' // Compiles a C++ file (modify filename if needed)
+                script {
+                    sh 'g++ -o PES2UG22CS455-1 main.cpp' // Compile the .cpp file
+                }
             }
         }
-
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                sh './output' // Execute compiled file (change according to your test)
+                script {
+                    sh './PES2UG22CS455-1' // Run the compiled program
+                }
             }
         }
-
         stage('Deploy') {
             steps {
-                echo 'Deploying the application...'
-                sh 'echo "Deployment successful!"'
+                echo 'Deploying application...'
             }
         }
     }
-
     post {
         failure {
             echo 'Pipeline failed'
         }
-        success {
-            echo 'Pipeline completed successfully'
-        }
     }
 }
+
